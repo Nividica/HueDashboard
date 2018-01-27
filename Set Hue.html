@@ -1,0 +1,135 @@
+<html>
+  <head>
+    <script>
+    function SetLightState(lightID, state){
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          var output = document.getElementById('output');
+          output.innerHTML = this.responseText + '<br>' + output.innerHTML;
+        }
+      };
+      xhttp.open('PUT', 'http://192.168.1.81/api/BHK-wIFq1c9UGJRlsrlzMBxJmk4N9Tew6t4EEdOf/lights/' + String(lightID) + '/state', true);
+      xhttp.setRequestHeader("Content-Type", "application/json");
+      xhttp.send(JSON.stringify(state));
+      SetSliderState(state);
+    }
+    function GetLightStates(){
+      var xhttp = new XMLHttpRequest();
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          if( this.response ){
+            var lightState = JSON.parse(this.response)[2].state;
+            console.log(lightState);
+            SetSliderState(lightState);
+          }
+        }
+      };
+      xhttp.open('GET', 'http://192.168.1.81/api/BHK-wIFq1c9UGJRlsrlzMBxJmk4N9Tew6t4EEdOf/lights', true);
+      xhttp.setRequestHeader("Content-Type", "application/json");
+      xhttp.send(null);
+    }
+    function SetSliderState(state){
+      if(state.hue != null){ document.getElementById('sliderHue').value = state.hue; }
+      if(state.sat != null){ document.getElementById('sliderSat').value = state.sat; }
+      if(state.bri != null){ document.getElementById('sliderBri').value = state.bri; }
+      if(state.transitiontime != null){ document.getElementById('sliderTime').value = state.transitiontime; }
+    }
+    function SetLightColor( id, hue, sat, bri, time ){
+      var state = {}
+      if(hue != null){ state.hue = Math.max(Math.min(hue, 65535), 0); }
+      if(sat != null){ state.sat = Math.max(Math.min(sat, 254), 0); }
+      if(bri != null){ state.bri = Math.max(Math.min(bri, 254), 0); }
+      if(time != null){ state.transitiontime = Math.max(time, 0); }
+      SetLightState(id, state)
+    }
+    function FullColor(hue, time){
+      if( time == null){ time = 4; }
+      SetLightColor(2, hue, 254, 254, time);
+      SetLightColor(4, hue, 254, 254, time);
+    }
+    function GreyScale(bri){
+      SetLightColor(2, 0, 0, bri, 6);
+      SetLightColor(4, 0, 0, bri, 6);
+    }
+    function SetFromSliders(){
+      var hue = Number(document.getElementById('sliderHue').value || 0);
+      var bri = Number(document.getElementById('sliderBri').value || 0);
+      var sat = Number(document.getElementById('sliderSat').value || 0);
+      var time = Number(document.getElementById('sliderTime').value || 4);
+      SetLightColor(2, hue, sat, bri, time);
+      SetLightColor(4, hue, sat, bri, time);
+    }
+    
+    var pulse_hue = 0;
+    var pulse_int_id = null;
+    function PulseLight(){
+      var pulser = document.getElementById('pulser');
+      if( pulse_int_id == null ){
+        pulse_int_id = setInterval(function(){
+          if(pulse_hue === 0 ){
+            pulse_hue = 46920
+          } else {
+            pulse_hue = 0
+          }
+          FullColor(pulse_hue, 0);
+        }, 250);
+        pulser.innerHTML = 'Stop';
+      } else {
+        clearInterval(pulse_int_id);
+        pulse_int_id = null;
+        pulser.innerHTML = 'Pulse';
+      }
+    }
+    function ResetLights(){
+      if( pulse_int_id != null ){ PulseLight(); }
+      SetLightColor(2, 9000, 50, 240, 4);
+      SetLightColor(4, 9000, 50, 240, 4);
+    }
+    </script>
+  </head>
+  <body>
+    <button onclick="FullColor(0)" >Red</button>
+    <button onclick="FullColor(25500)" >Green</button>
+    <button onclick="FullColor(46920)" >Blue</button>
+    |
+    <button onclick="GreyScale(0)" >Dark</button>
+    <button onclick="GreyScale(125)" >Dim</button>
+    <button onclick="GreyScale(254)" >Bright</button>    
+    |
+    <button onclick="PulseLight()" id="pulser" >Pulse</button>
+    |
+    <button onclick="GetLightStates()" >Load</button>
+    <button onclick="ResetLights()" >Reset</button>
+    <hr>
+    <table border="0">
+      <tr>
+        <td>Hue:</td>
+        <td><input type="range" min="0" max="65535" value="0" id="sliderHue"></td>
+      </tr>
+      <tr>
+        <td>
+          Brightness:
+        </td>
+        <td>
+          <input type="range" min="0" max="254" value="254" id="sliderBri">
+        </td>
+      </tr>
+      <tr>
+        <td>
+          Saturation:
+        </td>
+        <td><input type="range" min="0" max="254" value="50" id="sliderSat"></td>
+      </tr>
+      <tr>
+        <td>
+          Delay:
+        </td>
+        <td><input type="range" min="0" max="500" value="4" id="sliderTime"></td>
+      </tr>
+    </table>
+    <button onclick="SetFromSliders()">Apply</button>
+    <hr>
+    <div id="output"></div>
+  </body>
+</html>
