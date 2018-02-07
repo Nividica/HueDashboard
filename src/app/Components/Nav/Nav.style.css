@@ -1,0 +1,13 @@
+a {
+    color: #dedede;
+}
+
+a:visited {
+    color: #dedede;
+}
+
+a:hover {
+    color: white;
+    font-style: normal;
+    text-decoration: none;
+}

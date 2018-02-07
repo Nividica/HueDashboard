@@ -1,1 +1,136 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+    background-color: #101010;
+    color: #dedede;
+    height: 100vh;
+    width: 100vw;
+}
+
+@media(min-width:992px) {
+    overflow: hidden;
+}
+
+.bs-callout {
+    padding: 10px;
+    margin: 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+
+.bs-callout h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+
+.bs-callout p:last-child {
+    margin-bottom: 0;
+}
+
+.bs-callout code {
+    border-radius: 3px;
+}
+
+.bs-callout+.bs-callout {
+    margin-top: -5px;
+}
+
+.bs-callout-default {
+    border-left-color: #777;
+}
+
+.bs-callout-default h3 {
+    color: #777;
+}
+
+.bs-callout-primary {
+    border-left-color: #428bca;
+}
+
+.bs-callout-primary h3 {
+    color: #428bca;
+}
+
+.bs-callout-success {
+    border-left-color: #5cb85c;
+}
+
+.bs-callout-success h3 {
+    color: #5cb85c;
+}
+
+.bs-callout-danger {
+    border-left-color: #d9534f;
+}
+
+.bs-callout-danger h3 {
+    color: #d9534f;
+}
+
+.bs-callout-warning {
+    border-left-color: #f0ad4e;
+}
+
+.bs-callout-warning h3 {
+    color: #f0ad4e;
+}
+
+.bs-callout-info {
+    border-left-color: #5bc0de;
+}
+
+.bs-callout-info h3 {
+    color: #5bc0de;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 0px;
+    margin-bottom: 15px;
+}
+
+.table.pk-column1>tbody>tr>td:first-of-type {
+    font-weight: bold;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.panel {
+    background-color: transparent;
+}
+
+.bs-callout {
+    background-color: #1e1e1e;
+}
+
+.color-box {
+    min-height: 1em;
+    min-width: 4em;
+    border: 3px double white;
+    display: inline-block
+}
+
+::-webkit-scrollbar-track {
+    border-radius: 0px;
+    background-color: #101015;
+}
+
+::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb {
+    margin-left: 10px;
+    padding-left: 10px;
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+    background-color: #202020;
+}

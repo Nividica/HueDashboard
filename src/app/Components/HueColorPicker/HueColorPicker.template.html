@@ -1,0 +1,92 @@
+<div class="row">
+  <div class="col-md-12">
+    <h3>Color picker / editor</h3>
+    <ul>
+      <li>Should be able to select a color with Hue+Sat, or XY.</li>
+      <li>Should be able to push that color the selected object, be it light, room, group, etc</li>
+      <li>Include delay</li>
+      <li>Color selection for hue+sat sliders</li>
+    </ul>
+  </div>
+</div>
+
+<div style="width:50%;">
+  <!-- Hue, Sat, Bri -->
+  <div class="bs-callout bs-callout-primary">
+    <div class="row">
+      <!-- Title -->
+      <div class="col-md-12">
+        <h3>Hue | Saturation | Brightness</h3>
+      </div>
+
+      <!-- Controls  -->
+      <div class="col-xs-10">
+
+        <!-- Hue -->
+        <div class="row">
+          <div class="col-md-2">
+            Hue:
+          </div>
+          <div class="col-md-10">
+            <input type="range" [min]="Sliders.Hue.Min" [max]="Sliders.Hue.Max" [ngModel]="Sliders.Hue.Value" (ngModelChange)="Sliders.Hue.Value=$event; UpdateHSB();">
+          </div>
+        </div>
+
+        <!-- Saturation -->
+        <div class="row">
+          <div class="col-md-2">
+            Saturation:
+          </div>
+          <div class="col-md-10">
+            <input type="range" [min]="Sliders.Saturation.Min" [max]="Sliders.Saturation.Max" [ngModel]="Sliders.Saturation.Value" (ngModelChange)="Sliders.Saturation.Value=$event; UpdateHSB();">
+          </div>
+        </div>
+
+        <!-- Brightness -->
+        <div class="row">
+          <div class="col-md-2">
+            Brightness:
+          </div>
+          <div class="col-md-10">
+            <input type="range" [min]="Sliders.Brightness.Min" [max]="Sliders.Brightness.Max" [ngModel]="Sliders.Brightness.Value" (ngModelChange)="Sliders.Brightness.Value=$event; UpdateHSB();">
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Color box -->
+      <div class="col-xs-2">
+        <div class="color-box" [ngStyle]="{'background':HSBAsHex}">&nbsp;</div>
+        <br> {{HSBAsHex}}
+      </div>
+
+
+    </div>
+  </div>
+  <!-- Apply TODO: Just for testing, this will live outside the picker. -->
+  <div class="bs-callout bs-callout-success">
+    <div class="row">
+      <!-- Title -->
+      <div class="col-md-12">
+        <h3>Apply Color</h3>
+      </div>
+      <!-- Controls  -->
+      <div class="col-xs-10">
+
+        <!-- Delay -->
+        <div class="row">
+          <div class="col-md-4">
+            Delay: {{DelayString}}
+          </div>
+          <div class="col-md-8">
+            <input type="range" [min]="Sliders.TransitionTime.Min" [max]="Sliders.TransitionTime.Max" [ngModel]="Sliders.TransitionTime.Value"
+              (ngModelChange)="Sliders.TransitionTime.Value=$event; UpdateDelayString();">
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-2">
+        <button class="btn btn-success" (click)="ApplyColor()">Send</button>
+      </div>
+    </div>
+  </div>

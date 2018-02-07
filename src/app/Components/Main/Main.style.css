@@ -1,0 +1,27 @@
+.content-row {
+    margin: 0;
+    width: 100vw;
+    overflow: hidden
+}
+
+.nav-col {
+    border-right-color: #dedede;
+    border-right-style: dotted;
+    border-right-width: 5px;
+    overflow-x: hidden;
+}
+
+.content-col {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin-right: 0;
+}
+
+@media(min-width:992px) {
+    .nav-col {
+        height: 100vh;
+    }
+    .content-col {
+        height: 100vh;
+    }
+}

@@ -1,0 +1,100 @@
+<div class="panel panel-primary">
+  <div class="panel-heading clickable" (click)="IsCollapsed = !IsCollapsed">
+    <h3>[{{BridgeID}}] {{Light.name}}
+      <ng-container *ngIf="Light.state.reachable === false">
+        <span style="color:#ffd28d">(!) Unresponsive (!)</span>
+      </ng-container>
+    </h3>
+  </div>
+  <div class="panel-body panel-collapse" [ngClass]="{ 'collapse': IsCollapsed}">
+    <div class="row">
+
+      <!-- Device info -->
+      <div class="col-md-6">
+        <div class="bs-callout bs-callout-info">
+          <h3>Device</h3>
+          <table class="table pk-column1">
+            <tbody>
+              <tr>
+                <td>Name</td>
+                <td>{{Light.name}}</td>
+              </tr>
+              <tr>
+                <td>Bridge ID</td>
+                <td>{{BridgeID}}</td>
+              </tr>
+              <tr>
+                <td>Manufacturer</td>
+                <td>{{Light.manufacturername}}</td>
+              </tr>
+              <tr>
+                <td>Type</td>
+                <td>{{Light.type}}</td>
+              </tr>
+              <tr>
+                <td>Model</td>
+                <td>{{Light.modelid}}</td>
+              </tr>
+              <tr>
+                <td>Product ID</td>
+                <td>{{Light.productid}}</td>
+              </tr>
+              <tr>
+                <td>UUID</td>
+                <td>{{Light.uniqueid}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Light State -->
+      <div class="col-md-6">
+        <div class="bs-callout bs-callout-success">
+          <h3>State</h3>
+          <table class="table pk-column1">
+            <tbody>
+              <tr>
+                <td>On?</td>
+                <td>{{Light.state.on ? 'Yes' : 'No'}}</td>
+              </tr>
+              <tr>
+                <td>Brightness</td>
+                <td>{{(Light.state.bri / 254) | percent:'1.1'}}</td>
+              </tr>
+              <tr>
+                <td>Hue</td>
+                <td>
+                  <div class="color-box" [ngStyle]="{'background':HueAsHex}">&nbsp;</div> {{Light.state.hue}}
+                </td>
+              </tr>
+              <tr>
+                <td>Saturation</td>
+                <td>{{(Light.state.sat / 254) | percent:'1.1'}}</td>
+              </tr>
+              <tr>
+                <td>CIE 1931 Point</td>
+                <td>
+                  <div class="color-box" [ngStyle]="{'background':XYAsHex}">&nbsp;</div> x: {{Light.state.xy[0]}}, y:{{Light.state.xy[1]}}
+                </td>
+              </tr>
+              <tr>
+                <td>Mired Color Temperature</td>
+                <td>{{Light.state.ct}}</td>
+              </tr>
+              <tr>
+                <td>Color Mode</td>
+                <td>{{Light.state.colormode}}</td>
+              </tr>
+              <tr>
+                <td>Effect</td>
+                <td>{{Light.state.effect}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
