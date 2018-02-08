@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { Router, ActivatedRoute, NavigationEnd } from "@angular/router";
 import { Title } from "@angular/platform-browser";
 import { ActivatedRouteSnapshot } from "@angular/router/src/router_state";
-import { HueAPI } from "../../HueAPI/HueAPI";
 
 @Component({
   selector: 'app-hue',
@@ -13,10 +12,7 @@ export class MainAppComponent implements OnInit {
 
   public constructor(private Router: Router,
     private ActivatedRoute: ActivatedRoute,
-    private TitleService: Title,
-    private HueAPI: HueAPI) {
-    // Set bridge address here
-
+    private TitleService: Title) {
   }
 
   public ngOnInit(): void {

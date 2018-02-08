@@ -242,6 +242,30 @@ export abstract class HueHelper {
     return '#' + rC + gC + bC;
   }
 
+  /**
+   * Returns the error message sent by the bridge, or null.
+   * @param response 
+   */
+  public static IsHttpResponseBridgeError(response: any): string {
+    // Non null response?
+    if (response) {
+      // Reponse is an array?
+      if (Array.isArray(response)) {
+        // Array has element 0?
+        let respZero = response[0];
+        if (respZero) {
+          // Element has error field?
+          let err = respZero['error'];
+          if (err) {
+            return err.description;
+          }
+        }
+      }
+    }
+
+    return null;
+  }
+
   private static Rescale(InputValue: number, InputMin: number, InputMax: number, OutputMin: number, OutputMax: number) {
     let percent: number = (InputValue - InputMin) / (InputMax - InputMin);
     return OutputMin + (percent * (OutputMax - OutputMin));

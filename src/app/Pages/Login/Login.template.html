@@ -1,0 +1,48 @@
+<div class="centered-content-container login-container">
+  <div class="panel panel-primary">
+    <!-- Title -->
+    <div class="panel-heading">
+      <h2 style="text-align: center;">Bridge Login</h2>
+    </div>
+
+    <!-- Content -->
+    <div class="panel-body">
+      <!-- Form -->
+      <form class="form-horizontal h-center">
+        <!-- Address -->
+        <div class="form-group">
+          <label class="control-label col-sm-3" for="address">Address:</label>
+          <div class="col-sm-7">
+            <input type="text" class="form-control" [(ngModel)]="BridgeIP" id="address" name="address">
+          </div>
+        </div>
+
+        <!-- Username -->
+        <div class="form-group">
+          <label class="control-label col-sm-3" for="username">Username:</label>
+          <div class="col-sm-7">
+            <input type="text" class="form-control" [(ngModel)]="BridgeUser" id="username" name="username">
+          </div>
+        </div>
+
+        <!-- Submit -->
+        <div class="form-group">
+          <div class="col-sm-7 col-xs-offset-3">
+            <button type="submit" class="btn btn-info form-control" (click)="AttemptLogin()" [disabled]="IsWaiting">
+              <i *ngIf="IsWaiting" class="fa fa-spin fa-refresh"></i>
+              Login
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <!-- Error -->
+      <div *ngIf="HttpError" class="col-md-12 error-box">
+        <div class="bs-callout bs-callout-danger">
+          <i class="fa fa-exclamation-circle"></i> Error: {{HttpError}}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

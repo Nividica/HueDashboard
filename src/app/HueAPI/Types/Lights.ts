@@ -1,3 +1,8 @@
+/**
+ * Defines the structure of the data used by the Lights API.
+ * Author: Chris McGhee, Nividica@gmail.com
+ */
+
 import { Observable } from "rxjs/Observable";
 
 

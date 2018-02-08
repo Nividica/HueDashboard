@@ -1,9 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'
-
-
-import { HueAPI } from './HueAPI/HueAPI';
 import { HttpClientModule } from '@angular/common/http';
 import { HueLightInfoComponent } from './Components/HueLightInfo/HueLightInfo.component';
 import { HueLightsPage } from './Pages/Lights/Lights.page';
@@ -12,6 +9,10 @@ import { NavComponent } from './Components/Nav/Nav.component';
 import { AppRouting } from './app.routing';
 import { MainAppComponent } from './Components/Main/Main.component';
 import { HueColorPickerComponent } from './Components/HueColorPicker/HueColorPicker.component';
+import { BridgeLoginPage } from './Pages/Login/Login.page';
+import { BridgeGuard } from './Services/BridgeGuard.service';
+import { SessionService } from './Services/Session.service';
+import { HueAPI } from './Services/HueAPI.service';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { HueColorPickerComponent } from './Components/HueColorPicker/HueColorPic
     HueLightsPage,
     HueLightInfoComponent,
     NavComponent,
-    HueColorPickerComponent
+    HueColorPickerComponent,
+    BridgeLoginPage
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,9 @@ import { HueColorPickerComponent } from './Components/HueColorPicker/HueColorPic
     AppRouting
   ],
   providers: [
-    HueAPI
+    HueAPI,
+    BridgeGuard,
+    { provide: SessionService, useFactory: SessionService.Singleton }
   ],
   bootstrap: [MainAppComponent]
 })

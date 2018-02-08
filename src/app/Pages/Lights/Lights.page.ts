@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HueAPI } from '../../HueAPI/HueAPI';
 import { HueLight, HueLightCollection } from '../../HueAPI/Types/Lights';
 import { OnDestroy } from '@angular/core/src/metadata/lifecycle_hooks';
+import { HueAPI } from '../../Services/HueAPI.service';
 
 @Component({
   selector: 'hue-lights-page',
@@ -11,7 +11,7 @@ export class HueLightsPage implements OnInit, OnDestroy {
   /**
    * API
    */
-  private HueAPI: HueAPI;
+  private HueService: HueAPI;
 
   /**
    * Lights from the bridge
@@ -28,7 +28,7 @@ export class HueLightsPage implements OnInit, OnDestroy {
   private IntervalHandle: any = null;
 
   constructor(hueAPI: HueAPI) {
-    this.HueAPI = hueAPI;
+    this.HueService = hueAPI;
   }
 
   public ngOnInit() {
@@ -75,7 +75,7 @@ export class HueLightsPage implements OnInit, OnDestroy {
   }
 
   private UpdateLights() {
-    this.HueAPI.GetAllLights().subscribe(
+    this.HueService.GetAllLights().subscribe(
       (response) => {
         if (this.Lights == null) {
           this.Lights = response;

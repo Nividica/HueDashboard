@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import { HueHelper } from "../../HueAPI/HueHelper";
-import { HueAPI } from "../../HueAPI/HueAPI";
 import { HueLightState } from "../../HueAPI/Types/Lights";
+import { HueAPI } from "../../Services/HueAPI.service";
 
 
 
